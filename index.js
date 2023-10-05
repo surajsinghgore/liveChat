@@ -60,7 +60,7 @@ socket.on('disconnect', () => {
   
 });
 
-server.listen(5000, () => {
+server.listen(process.env.PORT||3000, () => {
   console.log('server running at http://localhost:5000');
 });
 
