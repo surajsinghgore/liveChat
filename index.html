@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!-- 1.integrate socket.io on client -->
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Socket.IO chat</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+  </head>
+  <body>
+    <section class="msger">
+      <header class="msger-header">
+        <div class="msger-header-title">
+          <div>LiveChat</div>
+          <div class="users_count">
+            🟢<span id="countActiveusers">0 </span> users Live
+          </div>
+        </div>
+        <div class="msger-header-options">
+          <span><i class="fas fa-cog"></i></span>
+        </div>
+      </header>
+
+      <main class="msger-chat" id="message_container">
+ <p></p>
+        
+      </main>
+
+      <form class="msger-inputarea" id="forms">
+        <input
+          type="text"
+          class="msger-input"
+          placeholder="Enter your message..."
+          id="msg"
+        />
+        <button type="submit" class="msger-send-btn">Send</button>
+      </form>
+    </section>
+
+    <script defer src="./script.js"></script>
+  </body>
+</html>
