@@ -1,5 +1,4 @@
 const socket = io('/');
-
 var username = prompt("Enter Your Name before Joining Into Chat");
 var gender = prompt("Enter Your Gender before Joining Into Chat");
 
@@ -43,14 +42,14 @@ document.getElementById("forms").addEventListener("submit", (e) => {
   var audio = new Audio('send.mp3');
   audio.play();
   e.preventDefault();
-  
-  window.setInterval(function () {
-    var elem = document.getElementById("message_container");
-    elem.scrollTop = elem.scrollHeight;
-  }, 10);
 
+setTimeout(()=>{
   var elem = document.getElementById("message_container");
   elem.scrollTop = elem.scrollHeight;
+},10);
+
+
+
   let messageInput = document.getElementById("msg").value;
   socket.emit("send-message", messageInput);
 // sound
@@ -136,3 +135,5 @@ elements.innerHTML+=`
           <span>${username}</span> Left the chat
         </div>`;
 });
+
+

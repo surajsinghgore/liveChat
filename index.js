@@ -61,6 +61,6 @@ socket.on('disconnect', () => {
 });
 
 server.listen(PORT, () => {
-  console.log('server running at http://localhost:5000');
+  console.log(`server running at http://localhost:${PORT}`);
 });
 
