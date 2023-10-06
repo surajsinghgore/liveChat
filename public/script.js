@@ -1,8 +1,8 @@
 const socket = io("/");
-// var username = prompt("Enter Your Name before Joining Into Chat");
-// var gender = prompt("Enter Your Gender before Joining Into Chat");
-let username = "suraj";
-let gender = "mlae";
+var username = prompt("Enter Your Name before Joining Into Chat");
+var gender = prompt("Enter Your Gender before Joining Into Chat");
+// let username = "suraj";
+// let gender = "mlae";
 
 if (username == null || username == "") {
   username = prompt("Enter Your Name before Joining Into Chat");
