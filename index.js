@@ -14,7 +14,7 @@ const io = new Server(server);
 
 // handle home request
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname,'../server/index.html'))
+  res.sendFile(path.join(__dirname,'./index.html'))
 });
 
 
