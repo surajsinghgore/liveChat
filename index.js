@@ -4,7 +4,7 @@ const path=require('path')
 const { createServer } = require('node:http');
 // 1.Integrating Socket.IO
 const { Server } = require('socket.io');
-
+const PORT = process.env.PORT || 8080;
 
 const app = express();
 const server = createServer(app);
@@ -60,7 +60,7 @@ socket.on('disconnect', () => {
   
 });
 
-server.listen(process.env.PORT||3000, () => {
+server.listen(PORT, () => {
   console.log('server running at http://localhost:5000');
 });
 
