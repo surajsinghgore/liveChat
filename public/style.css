@@ -164,8 +164,6 @@ margin-bottom: 2%;
 margin-left: 25%;
 opacity: 0.8;
 margin-top: -1.2%;
-
-
 border-radius: 2px;
   }
 
@@ -219,4 +217,29 @@ text-align: right ;
 }
 .users_count span{
 color: green;
+}
+
+
+
+@media screen and (max-width: 430px) {
+ 
+  .msger-header-title{
+    display: flex !important;
+    width: auto;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5%;
+  }
+  .users_count{
+    text-align: right ;
+width:75vw;
+font-size: 4vw;
+      margin-left:0;
+    }
+    .users_count span{
+      color: green;
+      padding-right: 2%;
+      }
+      
 }
