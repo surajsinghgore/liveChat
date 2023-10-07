@@ -1,5 +1,5 @@
 # liveChat
 
-Thanks : 
+Thanks : { NodeExpress | Socket.io }
 
- URL: livechat-q9ns.onrender.com
+ URL: <livechat-q9ns.onrender.com>
