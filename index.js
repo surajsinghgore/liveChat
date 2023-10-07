@@ -37,44 +37,62 @@ let activeUserCount=0;
 io.on('connection', (socket) => {
 
 
-
-
-  // username get
-
-  socket.on('new-user-join',data=>{
-    activeUserCount++;
-    socket.broadcast.emit('live-user-count',activeUserCount);
-    // set username in object
+  // create private chat room
+socket.on('create-new-room',data=>{
+// const {chatName,size,roomNumer}=data;
 users[socket.id]=data;
 
-// notify every one that new user join the chat
-socket.broadcast.emit('notify-new-user-to-all',data.username);
-// send self message to new user itself
-socket.emit('self-welcome',data.username);
-socket.emit('self-count',activeUserCount);
-  }) 
 
+// response user after create room request
+// socket.emit('room-create',data);
+
+})
+
+
+// join in private room
+socket.on('join-chat',data=>{
+  activeUserCount++;
+
+  users[socket.id]=data;
+const{username,roomcode}=data;
+// ! join the separate chat
+socket.join(roomcode);
+// notify every one that new user join the chat
+socket.broadcast.in(roomcode).emit('notify-new-user-to-all',username);
+// send self message to new user itself
+socket.emit('self-welcome',username);
+socket.broadcast.in(roomcode).emit('self-count',activeUserCount);
+socket.emit('self-count',activeUserCount);
+socket.emit('join-success',data);
+})
+
+  
 
 
 //message get from user and send to all connected users
-socket.on('send-message',message=>{
-socket.broadcast.emit('receive-message',{message,data:users[socket.id]})
+socket.on('send-message',({messageInput,roomcode})=>{
+socket.in(roomcode).emit('receive-message',{message:messageInput,data:users[socket.id]})
 })
 
 // if connection disconnect
 socket.on('disconnect', () => {
+
+  let roomcode=users[socket.id];
+
   if(activeUserCount<=0){
     activeUserCount=0;
   }else{
     activeUserCount--;
   }
-  socket.broadcast.emit('live-user-count',activeUserCount);
-
-
+  io.to(roomcode).emit('self-count',activeUserCount);
+  io.to(roomcode).emit('user-disconnect',users[socket.id]);
   // disconnect event
-  socket.broadcast.emit('user-disconnect',users[socket.id]);
+  console.log(users[socket.id])
+  delete users[socket.id];
 });
   
+
+
 });
 
 server.listen(PORT, () => {

@@ -1,17 +1,17 @@
 const socket = io("/");
-// var username = prompt("Enter Your Name before Joining Into Chat");
-// var gender = prompt("Enter Your Gender before Joining Into Chat");
-let username = "suraj";
-let gender = "mlae";
 
-if (username == null || username == "") {
-  username = prompt("Enter Your Name before Joining Into Chat");
-}
-if (gender == null || gender == "") {
-  gender = prompt("Enter Your Gender before Joining Into Chat");
-}
-// send new username to serve
-socket.emit("new-user-join", { username, gender });
+// create room code 
+
+
+    let username=sessionStorage.getItem('username')
+    let gender=sessionStorage.getItem('gender')
+    let roomcode=sessionStorage.getItem('roomcode')
+  
+//create chat room
+socket.emit('join-chat',{username,roomcode,gender})
+
+
+
 
 // self welcome message to current user
 socket.on("self-welcome", (username) => {
@@ -29,9 +29,9 @@ socket.on("self-count", (count) => {
   document.getElementById("countActiveusers").innerText = count;
 });
 // notify every one that new user join the chat
-socket.on("notify-new-user-to-all", (username) => {
+socket.on("notify-new-user-to-all", async(username) => {
   var audio = new Audio("newuser.mp3");
-  audio.play();
+  await audio.play();
   var elements = document.getElementById("message_container");
   elements.innerHTML += ` <div class="newUserjoin">
  <span>${username}</span> Join the chat
@@ -50,7 +50,7 @@ document.getElementById("forms").addEventListener("submit", (e) => {
   }, 10);
 
   let messageInput = document.getElementById("msg").value;
-  socket.emit("send-message", messageInput);
+  socket.emit("send-message", {messageInput,roomcode});
   // sound
 
   var elements = document.getElementById("message_container");
@@ -124,12 +124,14 @@ socket.on("receive-message", (data) => {
 // user disconnect
 
 socket.on("user-disconnect", (data) => {
+  console.log(data)
   var audio = new Audio("userleft.mp3");
   audio.play();
-  const { username } = data;
   var elements = document.getElementById("message_container");
   elements.innerHTML += `
 <div class="newUserleft">
           <span>${username}</span> Left the chat
         </div>`;
 });
+
+

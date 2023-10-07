@@ -39,5 +39,23 @@
     </section>
 
     <script defer src="./script.js"></script>
+    <script>
+ 
+
+      if(sessionStorage.getItem('join')!="true"){
+        window.location.href = "/joinChat";
+
+      }else{
+
+        if(sessionStorage.getItem('admin')=="true"){
+          var elements = document.getElementById("message_container");
+  elements.innerHTML += `<div class="welcome">
+Your Chat Code is : <span>${sessionStorage.getItem('roomcode')}</span>
+</div>`;
+        }
+      }
+
+     
+    </script>
   </body>
 </html>
