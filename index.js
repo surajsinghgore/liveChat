@@ -77,13 +77,15 @@ socket.in(roomcode).emit('receive-message',{message:messageInput,data:users[sock
 // if connection disconnect
 socket.on('disconnect', () => {
   if(activeUserCount<=0){
+
     activeUserCount=0;
   }else{
     activeUserCount--;
   }
-  var last = Object.keys(users).pop();
-  if(users[last]){
-    const {roomcode,username}=users[last];
+
+  if(users[socket.id]!=undefined){
+ 
+    const {roomcode,username}=users[socket.id];
     socket.broadcast.in(roomcode).emit('self-count',activeUserCount);
     socket.broadcast.in(roomcode).emit('user-disconnect',username);
     // disconnect event
