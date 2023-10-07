@@ -85,6 +85,7 @@ document.getElementById("forms").addEventListener("submit", (e) => {
 
 // message receive which is send by any other connected user
 socket.on("receive-message", (data) => {
+  console.log(data)
   var audio = new Audio("receive.mp3");
   audio.play();
   window.setInterval(function () {
@@ -123,14 +124,13 @@ socket.on("receive-message", (data) => {
 
 // user disconnect
 
-socket.on("user-disconnect", (data) => {
-  console.log(data)
+socket.on("user-disconnect", async(data) => {
   var audio = new Audio("userleft.mp3");
-  audio.play();
+  await audio.play();
   var elements = document.getElementById("message_container");
   elements.innerHTML += `
 <div class="newUserleft">
-          <span>${username}</span> Left the chat
+          <span>${data}</span> Left the chat
         </div>`;
 });
 

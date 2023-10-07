@@ -36,7 +36,7 @@ let users={};
 let activeUserCount=0;
 io.on('connection', (socket) => {
 
-
+  activeUserCount++;
   // create private chat room
 socket.on('create-new-room',data=>{
 // const {chatName,size,roomNumer}=data;
@@ -51,7 +51,7 @@ users[socket.id]=data;
 
 // join in private room
 socket.on('join-chat',data=>{
-  activeUserCount++;
+  
 
   users[socket.id]=data;
 const{username,roomcode}=data;
@@ -76,19 +76,20 @@ socket.in(roomcode).emit('receive-message',{message:messageInput,data:users[sock
 
 // if connection disconnect
 socket.on('disconnect', () => {
-
-  let roomcode=users[socket.id];
-
   if(activeUserCount<=0){
     activeUserCount=0;
   }else{
     activeUserCount--;
   }
-  io.to(roomcode).emit('self-count',activeUserCount);
-  io.to(roomcode).emit('user-disconnect',users[socket.id]);
-  // disconnect event
-  console.log(users[socket.id])
-  delete users[socket.id];
+  var last = Object.keys(users).pop();
+  if(users[last]){
+    const {roomcode,username}=users[last];
+    socket.broadcast.in(roomcode).emit('self-count',activeUserCount);
+    socket.broadcast.in(roomcode).emit('user-disconnect',username);
+    // disconnect event
+    
+  }
+  // delete users[socket.id];
 });
   
 

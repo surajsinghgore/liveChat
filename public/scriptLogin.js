@@ -7,7 +7,7 @@ document.getElementById('joinChat').addEventListener('submit',(e)=>{
     let gender=document.getElementById('gender').value;
  
 //create chat room
-socket.emit('join-chat',{username,roomcode,gender})
+// socket.emit('join-chat',{username,roomcode,gender})
 
 
     sessionStorage.setItem('join',true)
