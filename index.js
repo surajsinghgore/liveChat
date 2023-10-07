@@ -14,14 +14,31 @@ const io = new Server(server);
 
 // handle home request
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname,'./index.html'))
+  res.sendFile(path.join(__dirname,'./Join.html'))
+});
+// create chat
+app.get('/createChat', (req, res) => {
+  res.sendFile(path.join(__dirname,'./createChat.html'))
+});
+// join chat
+app.get('/joinChat', (req, res) => {
+  res.sendFile(path.join(__dirname,'./Join.html'))
 });
 
+
+// welcome to chat
+app.get('/welcome', (req, res) => {
+  res.sendFile(path.join(__dirname,'./index.html'))
+});
 
 // established connection
 let users={};
 let activeUserCount=0;
 io.on('connection', (socket) => {
+
+
+
+
   // username get
 
   socket.on('new-user-join',data=>{
