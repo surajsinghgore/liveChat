@@ -157,18 +157,18 @@
 width: 50%;
 height: auto;
 padding: 1.4% 0;
-background: #0394c9;
+background: #013346;
 color: #ffffff;
 text-align: center;
-text-transform: uppercase;
 margin-bottom: 2%;
 margin-left: 25%;
 opacity: 0.8;
-margin-top: -1.2%;
-border-radius: 2px;
+margin-top: -1%;
+border-radius: 40px;
   }
 
   .welcome span,.newUserleft   span,.newUserjoin span{
+    text-transform: capitalize;
 
     color: rgb(255, 217, 183);
   }

@@ -17,7 +17,7 @@ socket.emit('join-chat',{username,roomcode,gender})
 socket.on("self-welcome", (username) => {
   var elements = document.getElementById("message_container");
   elements.innerHTML += `<div class="welcome">
-welcome to Live Chat <span>${username}</span>
+  Hii <span>${username}</span>, Welcome to Chat 
 </div>`;
 });
 

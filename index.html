@@ -38,7 +38,7 @@
           <div class="room_code" onclick="CopyToClipboard()">
            
             <div > Room Code : </div>
-            <div > <span id="room_codes" > 236584</span> </div>
+            <div > <span id="room_codes" > </span> </div>
            
           </div>
           <div class="users_count">
@@ -129,8 +129,15 @@ setTimeout(()=>{
         if(sessionStorage.getItem('admin')=="true"){
           var elements = document.getElementById("message_container");
   elements.innerHTML += `<div class="welcome">
-Your Chat Code is : <span>${sessionStorage.getItem('roomcode')}</span>
+Share Room Code with friends to Join the chat
 </div>`;
+let roomcode=sessionStorage.getItem('roomcode');
+document.getElementById('room_codes').innerText=roomcode;
+        }
+        else{
+
+          let roomcode=sessionStorage.getItem('roomcode');
+document.getElementById('room_codes').innerText=roomcode;
         }
       }
 
