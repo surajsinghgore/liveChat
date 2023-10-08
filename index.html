@@ -6,19 +6,47 @@
     <title>Socket.IO chat</title>
     <link rel="stylesheet" href="style.css" />
     <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
   </head>
   <body>
+
+
+    <!-- alert section -->
+    <div class="toast">
+  
+      <div class="toast-content">
+        <i class="fas fa-solid fa-check check"></i>
+    
+        <div class="message">
+          <span class="text text-1">Success</span>
+          <span class="text text-2">Room Code Successfully copy to clipBoard</span>
+        </div>
+      </div>
+      <i class="fa-solid fa-xmark close">x</i>
+    
+      <!-- Remove 'active' class, this is just to show in Codepen thumbnail -->
+      <div class="progress active"></div>
+    </div>
+    
+
+
     <section class="msger">
       <header class="msger-header">
         <div class="msger-header-title">
           <div>LiveChat</div>
+          <div class="room_code" onclick="CopyToClipboard()">
+           
+            <div > Room Code : </div>
+            <div > <span id="room_codes" > 236584</span> </div>
+           
+          </div>
           <div class="users_count">
             🟢<span id="countActiveusers">0 </span> users Live
           </div>
         </div>
         <div class="msger-header-options">
-          <span><i class="fas fa-cog"></i></span>
+        
         </div>
       </header>
 
@@ -38,9 +66,60 @@
       </form>
     </section>
 
+
+
+
+
+
     <script defer src="./script.js"></script>
     <script>
- 
+
+      // copy to clip board
+ function CopyToClipboard() {
+
+var copyBoxElement = document.getElementById('room_codes').innerText;
+navigator.clipboard.writeText(copyBoxElement)
+// alert toasts
+const button = document.querySelector("button"),
+  toast = document.querySelector(".toast");
+(closeIcon = document.querySelector(".close")),
+  (progress = document.querySelector(".progress"));
+  toast.classList.add("active");
+let timer1, timer2;
+
+button.addEventListener("click", () => {
+  toast.classList.add("active");
+  progress.classList.add("active");
+
+  timer1 = setTimeout(() => {
+    toast.classList.remove("active");
+  }, 5000); //1s = 1000 milliseconds
+
+  timer2 = setTimeout(() => {
+    progress.classList.remove("active");
+  }, 5300);
+});
+
+closeIcon.addEventListener("click", () => {
+  toast.classList.remove("active");
+
+  setTimeout(() => {
+    progress.classList.remove("active");
+  }, 300);
+
+  clearTimeout(timer1);
+  clearTimeout(timer2);
+});
+setTimeout(()=>{
+  let toast = document.querySelector(".toast");
+  toast.classList.remove("active");
+},4000)
+
+// alert("Text has been copied")
+}
+
+
+
 
       if(sessionStorage.getItem('join')!="true"){
         window.location.href = "/joinChat";
@@ -57,5 +136,6 @@ Your Chat Code is : <span>${sessionStorage.getItem('roomcode')}</span>
 
      
     </script>
+    <script src="https://kit.fontawesome.com/7aa46b9c99.js" crossorigin="anonymous"></script>
   </body>
 </html>
