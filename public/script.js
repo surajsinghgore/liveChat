@@ -34,7 +34,7 @@ socket.on("notify-new-user-to-all", async(username) => {
   await audio.play();
   var elements = document.getElementById("message_container");
   elements.innerHTML += ` <div class="newUserjoin">
- <span>${username}</span> Join the chat
+ <span>${username} ,</span> Join the chat
 </div>`;
 });
 
@@ -130,7 +130,7 @@ socket.on("user-disconnect", async(data) => {
   var elements = document.getElementById("message_container");
   elements.innerHTML += `
 <div class="newUserleft">
-          <span>${data}</span> Left the chat
+          <span>${data}, </span> Left the chat
         </div>`;
 });
 
