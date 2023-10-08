@@ -42,7 +42,7 @@
            
           </div>
           <div class="users_count">
-            🟢<span id="countActiveusers">0 </span> users Live
+            🟢<span id="countActiveusers">0 </span>/<span id="maxsize"></span> users Live
           </div>
         </div>
         <div class="msger-header-options">
@@ -80,14 +80,13 @@
 var copyBoxElement = document.getElementById('room_codes').innerText;
 navigator.clipboard.writeText(copyBoxElement)
 // alert toasts
-const button = document.querySelector("button"),
-  toast = document.querySelector(".toast");
+const   toast = document.querySelector(".toast");
 (closeIcon = document.querySelector(".close")),
   (progress = document.querySelector(".progress"));
   toast.classList.add("active");
 let timer1, timer2;
 
-button.addEventListener("click", () => {
+
   toast.classList.add("active");
   progress.classList.add("active");
 
@@ -98,7 +97,7 @@ button.addEventListener("click", () => {
   timer2 = setTimeout(() => {
     progress.classList.remove("active");
   }, 5300);
-});
+
 
 closeIcon.addEventListener("click", () => {
   toast.classList.remove("active");
@@ -109,13 +108,14 @@ closeIcon.addEventListener("click", () => {
 
   clearTimeout(timer1);
   clearTimeout(timer2);
+
+
 });
 setTimeout(()=>{
   let toast = document.querySelector(".toast");
   toast.classList.remove("active");
 },4000)
 
-// alert("Text has been copied")
 }
 
 
@@ -133,11 +133,18 @@ Share Room Code with friends to Join the chat
 </div>`;
 let roomcode=sessionStorage.getItem('roomcode');
 document.getElementById('room_codes').innerText=roomcode;
+let maxsize=sessionStorage.getItem('size');
+if(maxsize){
+  document.getElementById('maxsize').innerText=maxsize;
+}
         }
         else{
-
           let roomcode=sessionStorage.getItem('roomcode');
 document.getElementById('room_codes').innerText=roomcode;
+let maxsize=sessionStorage.getItem('size');
+if(maxsize){
+  
+}
         }
       }
 

@@ -17,3 +17,4 @@ document.getElementById('joinChat').addEventListener('submit',(e)=>{
     window.location.href = "/welcome";
     // window.location.href = "/welcome";
 })
+

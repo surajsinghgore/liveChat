@@ -8,7 +8,7 @@ document.getElementById('createChatForm').addEventListener('submit',(e)=>{
 let roomNumer=Math.floor(Math.random() * 899999 + 100000);
  
 //create chat room
-socket.emit('create-new-room',{username,size,roomNumer})
+socket.emit('create-new-room',{username,size,roomcode:roomNumer})
 
 
             sessionStorage.setItem('join',true)
@@ -16,6 +16,7 @@ socket.emit('create-new-room',{username,size,roomNumer})
             sessionStorage.setItem('admin',true)
             sessionStorage.setItem('gender',gender)
             sessionStorage.setItem('roomcode',roomNumer)
+            sessionStorage.setItem('size',size)
             window.location.href = "/welcome";
       
 

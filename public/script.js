@@ -11,6 +11,22 @@ const socket = io("/");
 socket.emit('join-chat',{username,roomcode,gender})
 
 
+// not a valid Room Code
+
+socket.on('not-valid-code',message=>{
+  alert(message);
+
+    window.location.href = "/createChat";
+
+})
+
+// maximum size reached
+socket.on('maximum-size-reached',message=>{
+  window.location.href = "/joinChat";
+  alert(message);
+
+
+})
 
 
 // self welcome message to current user
@@ -19,9 +35,16 @@ socket.on("self-welcome", (username) => {
   elements.innerHTML += `<div class="welcome">
   Hii <span>${username}</span>, Welcome to Chat 
 </div>`;
+
+
+socket.on('max-size-get',size=>{
+  document.getElementById('maxsize').innerText=size;
+sessionStorage.setItem('size',size);
+})
 });
 
 socket.on("live-user-count", (count) => {
+
   document.getElementById("countActiveusers").innerText = count;
 });
 
@@ -125,13 +148,16 @@ socket.on("receive-message", (data) => {
 // user disconnect
 
 socket.on("user-disconnect", async(data) => {
+  const {alert,username}=data;
+  if(alert){
   var audio = new Audio("userleft.mp3");
   await audio.play();
   var elements = document.getElementById("message_container");
   elements.innerHTML += `
 <div class="newUserleft">
-          <span>${data}, </span> Left the chat
+          <span>${username}, </span> Left the chat
         </div>`;
+
+  }
+
 });
-
-
