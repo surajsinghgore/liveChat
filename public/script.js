@@ -43,7 +43,7 @@ document.getElementById("forms").addEventListener("submit", (e) => {
   var audio = new Audio("send.mp3");
   audio.play();
   e.preventDefault();
-
+console.log('new')
   setTimeout(() => {
     var elem = document.getElementById("message_container");
     elem.scrollTop = elem.scrollHeight;
@@ -85,10 +85,10 @@ document.getElementById("forms").addEventListener("submit", (e) => {
 
 // message receive which is send by any other connected user
 socket.on("receive-message", (data) => {
-  console.log(data)
+
   var audio = new Audio("receive.mp3");
   audio.play();
-  window.setInterval(function () {
+  window.setTimeout(function () {
     var elem = document.getElementById("message_container");
     elem.scrollTop = elem.scrollHeight;
   }, 10);
